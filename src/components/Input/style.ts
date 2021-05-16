@@ -1,6 +1,12 @@
 import styled from "styled-components";
 export const StyledInput = styled.input.attrs({ className: "input" })`
+  width: 300px;
+  height: 35px;
+  padding: 0 10px;
   outline: none;
+  border: none;
+  box-shadow: ${({ theme }) => theme.shadow};
+  ${({ theme }) => theme.cardBg};
 `;
 
 export const SelectorWrapper = styled.div.attrs({
@@ -12,15 +18,36 @@ export const SelectorWrapper = styled.div.attrs({
 export const DropdownContainer = styled.ul.attrs({
   className: "selector-dropdown-container",
 })`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+  max-height: 400px;
+  overflow-y: scroll;
   position: absolute;
-  background-color: #ccc;
+  padding: 20px 10px;
+  box-sizing: border-box;
   z-index: 10;
+
+  box-shadow: ${({ theme }) => theme.shadow};
+  ${({ theme }) => theme.cardBg};
 `;
 
 export const DropdownItem = styled.li.attrs({
   className: "selector-dropdown-item",
-})``;
+})`
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  color: ${({ theme }) => theme.black};
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    color: ${({ theme }) => theme.white};
+  }
+  transition: ${({ theme }) => theme.transition};
+`;
 
 export const Cover = styled.div.attrs({ className: "selector-cover" })`
   position: fixed;

@@ -16,7 +16,7 @@ export interface LocationWithForecast extends Location {
   timezone_name: string;
 }
 
-interface ConsolidatedWeather {
+export interface ConsolidatedWeather {
   air_pressure: number;
   applicable_date: string;
   created: string;

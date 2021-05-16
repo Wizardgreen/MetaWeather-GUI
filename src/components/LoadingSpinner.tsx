@@ -25,7 +25,7 @@ const SpinnerContainer = styled.div.attrs({ className: "loading-spinner" })`
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #fff;
+      background: ${({ theme }) => theme.white};
       margin: -4px 0 0 -4px;
     }
     &:nth-child(1) {

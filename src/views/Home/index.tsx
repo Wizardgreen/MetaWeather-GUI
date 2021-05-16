@@ -3,16 +3,21 @@ import { getLocationList, getRecentForecast } from "../../api/index";
 import Input from "../../components/Input";
 import Title from "../../components/Title";
 import PageWrapper from "../../components/PageWrapper";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import ForecastList from "../../components/ForecastList";
+
 import _debounce from "lodash/debounce";
-import { MainContentWrapper } from "./style";
-import { Location, LocationWithForecast } from "../../assets/types";
+import { SearchBarWrapper, MainContentWrapper } from "./style";
+import {
+  Location,
+  LocationWithForecast,
+  ConsolidatedWeather,
+} from "../../assets/types";
 
 export default function Home() {
   const [searchKey, setSearchKey] = useState<string>("");
   const [locationList, setLocationList] = useState<Location[]>([]);
   const [locationLoading, setLocationLoading] = useState<boolean>(false);
-  const [weatherData, setWeatherData] = useState<LocationWithForecast | {}>({});
+  const [weatherData, setWeatherData] = useState<ConsolidatedWeather[]>([]);
   const [weatherLoading, setWeatherLoading] = useState<boolean>(false);
   const [targetWOEID, setTargetWOEID] = useState<number | null>(null);
 
@@ -57,24 +62,33 @@ export default function Home() {
     if (targetWOEID === null) return;
     setWeatherLoading(true);
     getRecentForecast(targetWOEID).then(({ data }) => {
-      setWeatherData(data);
+      const { consolidated_weather } = data;
+      if (consolidated_weather.length > 5) {
+        setWeatherData(consolidated_weather.slice(1));
+      } else {
+        setWeatherData(consolidated_weather);
+      }
+
+      console.log(weatherData);
       setWeatherLoading(false);
     });
   }, [targetWOEID]);
 
   return (
     <PageWrapper>
-      <Title>search location for weather.</Title>
-      <Input
-        value={searchKey}
-        options={locationList}
-        onChange={handleInput}
-        onSelect={handleSelect}
-        viewKey="title"
-        loading={locationLoading}
-      />
+      <SearchBarWrapper>
+        <Title>search location for weather.</Title>
+        <Input
+          value={searchKey}
+          options={locationList}
+          onChange={handleInput}
+          onSelect={handleSelect}
+          viewKey="title"
+          loading={locationLoading}
+        />
+      </SearchBarWrapper>
       <MainContentWrapper>
-        {weatherLoading && <LoadingSpinner />}
+        <ForecastList loading={weatherLoading} dataList={weatherData} />
       </MainContentWrapper>
     </PageWrapper>
   );

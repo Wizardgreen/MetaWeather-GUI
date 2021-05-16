@@ -9,5 +9,5 @@ export const getLocationList = (name: string) => {
 };
 
 export const getRecentForecast = (woeid: number) => {
-  return axios.get<LocationWithForecast[]>(`/location/${woeid}`);
+  return axios.get<LocationWithForecast>(`/location/${woeid}`);
 };

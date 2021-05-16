@@ -10,6 +10,10 @@ const PageWrapper = styled.div.attrs({ className: "page-wrapper" })`
     url(${bg});
   background-size: cover;
   background-position: center;
+  > div {
+    max-width: 1200px;
+    width: 100%;
+  }
 `;
 
 export default PageWrapper;
