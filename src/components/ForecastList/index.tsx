@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import LoadingSpinner from "../LoadingSpinner";
-import { ForecastListWrapper, ForecastCard, Day } from "./style";
+import { ForecastListWrapper, ForecastCard, Day, DateText } from "./style";
 import { ConsolidatedWeather } from "../../assets/types";
 
 interface ForecastListProps {
@@ -29,6 +29,7 @@ export default function ForecastList({ dataList, loading }: ForecastListProps) {
       const dayKey = new Date(data.applicable_date)
         .getDay()
         .toString() as keyof typeof DayMap;
+      const date = data.applicable_date.slice(5).replace("-", "/");
       return (
         <ForecastCard key={data.id}>
           <img
@@ -36,6 +37,7 @@ export default function ForecastList({ dataList, loading }: ForecastListProps) {
             alt="weather-icon"
           />
           <Day>{DayMap[dayKey]}</Day>
+          <DateText>{date}</DateText>
         </ForecastCard>
       );
     });

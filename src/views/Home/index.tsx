@@ -4,14 +4,11 @@ import Input from "../../components/Input";
 import Title from "../../components/Title";
 import PageWrapper from "../../components/PageWrapper";
 import ForecastList from "../../components/ForecastList";
+import PieChart from "../../components/PieChart";
 
 import _debounce from "lodash/debounce";
-import { SearchBarWrapper, MainContentWrapper } from "./style";
-import {
-  Location,
-  LocationWithForecast,
-  ConsolidatedWeather,
-} from "../../assets/types";
+import { SearchBarWrapper, DayListWrapper, ChartWrapper } from "./style";
+import { Location, ConsolidatedWeather } from "../../assets/types";
 
 export default function Home() {
   const [searchKey, setSearchKey] = useState<string>("");
@@ -87,9 +84,17 @@ export default function Home() {
           loading={locationLoading}
         />
       </SearchBarWrapper>
-      <MainContentWrapper>
+      <DayListWrapper>
         <ForecastList loading={weatherLoading} dataList={weatherData} />
-      </MainContentWrapper>
+      </DayListWrapper>
+      <ChartWrapper>
+        {!weatherLoading && (
+          <>
+            <PieChart dataList={weatherData} />
+            <PieChart dataList={weatherData} />
+          </>
+        )}
+      </ChartWrapper>
     </PageWrapper>
   );
 }

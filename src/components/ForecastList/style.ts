@@ -31,8 +31,14 @@ export const ForecastCard = styled.div.attrs({ className: "forecast-card" })`
 
 export const Day = styled.p.attrs({ className: "forecast-day" })`
   margin-top: 15px;
+  margin-bottom: 0;
   font-size: 2rem;
   text-transform: capitalize;
   letter-spacing: 3px;
+  color: ${({ theme }) => theme.black};
+`;
+
+export const DateText = styled.p.attrs({ className: "forecast-date-text" })`
+  margin-top: 0;
   color: ${({ theme }) => theme.black};
 `;
