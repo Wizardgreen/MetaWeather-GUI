@@ -7,6 +7,12 @@ export const StyledInput = styled.input.attrs({ className: "input" })`
   border: none;
   box-shadow: ${({ theme }) => theme.shadow};
   ${({ theme }) => theme.cardBg};
+  &:hover,
+  &:focus {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    filter: brightness(1.5);
+  }
+  transition: ${({ theme }) => theme.transition};
 `;
 
 export const SelectorWrapper = styled.div.attrs({
@@ -29,7 +35,8 @@ export const DropdownContainer = styled.ul.attrs({
   box-sizing: border-box;
   z-index: 10;
 
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  filter: brightness(1.2);
   ${({ theme }) => theme.cardBg};
 `;
 

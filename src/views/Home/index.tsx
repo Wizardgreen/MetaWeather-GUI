@@ -4,6 +4,7 @@ import Input from "../../components/Input";
 import Title from "../../components/Title";
 import PageWrapper from "../../components/PageWrapper";
 import ForecastList from "../../components/ForecastList";
+import BarChart from "../../components/BarChart";
 import PieChart from "../../components/PieChart";
 
 import _debounce from "lodash/debounce";
@@ -66,7 +67,6 @@ export default function Home() {
         setWeatherData(consolidated_weather);
       }
 
-      console.log(weatherData);
       setWeatherLoading(false);
     });
   }, [targetWOEID]);
@@ -88,9 +88,9 @@ export default function Home() {
         <ForecastList loading={weatherLoading} dataList={weatherData} />
       </DayListWrapper>
       <ChartWrapper>
-        {!weatherLoading && (
+        {!weatherLoading && weatherData.length !== 0 && (
           <>
-            <PieChart dataList={weatherData} />
+            <BarChart dataList={weatherData} />
             <PieChart dataList={weatherData} />
           </>
         )}

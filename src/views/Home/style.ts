@@ -24,9 +24,10 @@ export const ChartWrapper = styled.div.attrs({
 })`
   display: flex;
   flex: 5;
+  padding-top: 15px;
   > div {
     flex: 1;
-    margin-top: ${gap};
+    margin-top: 0;
     margin-right: 0;
     margin-bottom: ${gap};
     margin-left: ${gap};

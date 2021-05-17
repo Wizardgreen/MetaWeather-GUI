@@ -25,6 +25,7 @@ export default function Input({
 
   const handleSelect = (item: any) => {
     onSelect(item);
+    onChange(item.title);
     setExpend(false);
   };
 
